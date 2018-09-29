@@ -2,7 +2,7 @@ class Company:
     def __init__(self, employee):
         self.employee = employee
 
-    # 使用__getitem__方法，使得类可迭代，可切片
+    # 使用__getitem__方法，使得类可迭代
     def __getitem__(self, item):
         return self.employee[item]
 
