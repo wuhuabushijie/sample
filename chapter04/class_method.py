@@ -27,13 +27,13 @@ class Date:
             return False
 
 
-
-new_date = Date(2018,12,30)
-print(new_date)
-new_date.tomorrow()
-print(new_date)
-new_date=Date.parse_from_sting_static("2018-12-30")
-print(new_date)
-new_date=Date.parse_from_sting_class("2018-12-30")
-print(new_date)
-print(Date.valid_sting("2019-02-31"))
+if __name__ == "__main__":
+    new_date = Date(2018,12,30)
+    print(new_date)
+    new_date.tomorrow()
+    print(new_date)
+    new_date=Date.parse_from_sting_static("2018-12-30")
+    print(new_date)
+    new_date=Date.parse_from_sting_class("2018-12-30")
+    print(new_date)
+    print(Date.valid_sting("2019-02-31"))
