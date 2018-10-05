@@ -20,6 +20,6 @@ class User:
 if __name__ == "__main__":
     user = User("bob",date(1989,11,21))
     print(user.age)
-    user._age=45
+    user.age=45
     print(user._age)
     print(user.age)
