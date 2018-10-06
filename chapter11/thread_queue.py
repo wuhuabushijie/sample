@@ -1,0 +1,76 @@
+import threading, time
+
+detail_url_list=[]
+
+def get_detail_html():
+    global detail_url_list
+    while True:
+        if len(detail_url_list):
+            url = detail_url_list.pop()
+            print("Start getting page {} details".format(url))
+            time.sleep(2)
+            print("page {} has been got.".format(url))
+
+
+def get_detail_url():
+    global detail_url_list
+    print("Start getting url details")
+    time.sleep(2)
+    for i in range(20):
+        detail_url_list.append("http://{}.com".format(i))
+    print("Getting Url details ended")
+
+def run_join():
+    for i in range(20):
+        sub_thread = threading.Thread(target=get_detail_html)
+        sub_thread.start()
+
+def run1():
+    sub_thread_1 = threading.Thread(target=get_detail_url)
+    sub_thread_2 = threading.Thread(target=run_join)
+    sub_thread_1.start()
+    sub_thread_2.start()
+    start_time = time.time()
+    sub_thread_2.join()
+    sub_thread_1.join()
+
+
+    last_time = time.time()-start_time
+    print(last_time)
+
+
+class GetHtmlDetails(threading.Thread):
+    def __init__(self,name):
+        super().__init__(name=name)
+
+    def run(self):
+        print("Start getting html details")
+        time.sleep(4)
+        print("Getting html details ended")
+
+
+class GetUrlDetails(threading.Thread):
+    def __init__(self,name):
+        super().__init__(name=name)
+
+    def run(self):
+        print("Start getting url details")
+        time.sleep(2)
+        print("Getting Url details ended")
+
+
+def run2(html,url):
+    html.start()
+    url.start()
+    start_time = time.time()
+    html.join()
+    url.join()
+    last_time = time.time()-start_time
+    print(last_time)
+
+
+if __name__=="__main__":
+    run1()
+    # getHtmlDetails = GetHtmlDetails("get_html_details")
+    # getUrlDetails = GetUrlDetails("get_url_details")
+    # run2(getHtmlDetails,getUrlDetails)
