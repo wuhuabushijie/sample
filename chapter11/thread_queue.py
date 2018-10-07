@@ -10,29 +10,31 @@ def get_detail_html():
             print("Start getting page {} details".format(url))
             time.sleep(2)
             print("page {} has been got.".format(url))
-
+            if not len(detail_url_list):
+                break
 
 def get_detail_url():
     global detail_url_list
     print("Start getting url details")
     time.sleep(2)
-    for i in range(20):
+    for i in range(5):
         detail_url_list.append("http://{}.com".format(i))
     print("Getting Url details ended")
 
-def run_join():
-    for i in range(20):
-        sub_thread = threading.Thread(target=get_detail_html)
-        sub_thread.start()
-
 def run1():
     sub_thread_1 = threading.Thread(target=get_detail_url)
-    sub_thread_2 = threading.Thread(target=run_join)
+
     sub_thread_1.start()
-    sub_thread_2.start()
-    start_time = time.time()
-    sub_thread_2.join()
+    tt=[]
+    for i in range(5):
+        sub_thread = threading.Thread(target=get_detail_html)
+        tt.append(sub_thread)
+        sub_thread.start()
+
     sub_thread_1.join()
+    start_time = time.time()
+    for i in tt:
+        i.join()
 
 
     last_time = time.time()-start_time
