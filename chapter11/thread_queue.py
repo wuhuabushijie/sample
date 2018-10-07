@@ -8,7 +8,7 @@ def get_detail_html():
         if len(detail_url_list):
             url = detail_url_list.pop()
             print("Start getting page {} details".format(url))
-            time.sleep(2)
+            time.sleep(1)
             print("page {} has been got.".format(url))
             if not len(detail_url_list):
                 break
@@ -16,8 +16,8 @@ def get_detail_html():
 def get_detail_url():
     global detail_url_list
     print("Start getting url details")
-    time.sleep(2)
-    for i in range(5):
+    time.sleep(1)
+    for i in range(20):
         detail_url_list.append("http://{}.com".format(i))
     print("Getting Url details ended")
 
