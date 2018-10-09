@@ -1,9 +1,10 @@
-from concurrent.futures import ThreadPoolExecutor,as_completed
+from concurrent.futures import ThreadPoolExecutor,as_completed,wait,FIRST_COMPLETED
+from concurrent import futures
 import  time
 
 def get_html(times):
-    # time.sleep(times)
-    # print("get page {} success".format(times))
+    time.sleep(times)
+    print("get page {} success".format(times))
     return times
 
 
@@ -13,15 +14,17 @@ executor = ThreadPoolExecutor(max_workers=3)
 # task2 = executor.submit(get_html,(2))
 
 # 要获取已经成功的任务的返回值
-urls =[2,3,4,5,6,7,8]
-# all_task = [executor.submit(get_html,(url)) for url in urls]
+urls =[1,1,1,1,1,1,1]
+all_task = [executor.submit(get_html,(url)) for url in urls]
+wait(all_task,return_when=FIRST_COMPLETED)
+print("main")
 # for future in as_completed(all_task):
 #     data = future.result()
 #     print("get {} page success".format(data))
 
-#通过executor获取已经完成的task
-for data in executor.map(get_html,urls):
-    print("get {} page success".format(data))
+#通过executor获取已经完成的task的值，将按照urls中的顺序返回
+# for data in executor.map(get_html,urls):
+#     print("get {} page success".format(data))
 
 # #done()方法用于判定某个任务是否完成
 # print(task1.done())
